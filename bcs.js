@@ -28,9 +28,9 @@ function isOK(status) {
 
 
 var BCS = function(option) {
-    this.host = option.host;
-    this.ak = option.ak;
-    this.sk = option.sk;
+    this.host = (option.ak!=undefined && option.ak!="" )?option.ak:process.env.BAE_ENV_ADDR_BCS;
+    this.ak = (option.ak!=undefined && option.ak!="" )?option.ak:process.env.BAE_ENV_AK;
+    this.sk = (option.ak!=undefined && option.ak!="" )?option.ak:process.env.BAE_ENV_SK;
     //superfile 每个object分片后缀
     this.BCS_SUPERFILE_POSTFIX = option.postfix || '_bcs_superfile_';
     //sdk superfile分片大小 ，单位 B（字节）
@@ -91,11 +91,10 @@ BCS.prototype.authenticate = function(opt) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             console.log('BODY: ' + chunk);
-            // response['body'] += chunk;
         });
         res.on('end', function () {
             opt['callback'](false, response);
-            // console.log(response);
+            console.log(response);
         });
     });
     // Merge the HTTP headers
