@@ -510,7 +510,7 @@ BCS.prototype.format_signature = function(opt) {
         flags += 'MBO';
         content += "Method=" + opt['method'] + "\n"; //method
         content += "Bucket=" + opt['bucket'] + "\n"; //bucket
-        content += "Object=" + path.normalize(opt['object']) + "\n"; //object
+        content += "Object=" + opt['object'] + "\n"; //object
     } else {
         console.log( 'bucket、method and object cann`t be NULL!' );
         return false;
